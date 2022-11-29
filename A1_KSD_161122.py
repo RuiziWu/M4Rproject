@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 
 def diff_fn(X, Y):
