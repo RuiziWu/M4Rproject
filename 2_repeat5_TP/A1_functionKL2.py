@@ -116,6 +116,7 @@ def test_power(p, alpha):
     # Type-II error
     p2[p >= alpha] = 0
     tp = np.sum(p2, axis = -1) / m
+    
     return tp
 
 
