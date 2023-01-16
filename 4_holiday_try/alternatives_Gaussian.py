@@ -5,7 +5,9 @@ import KSD_test_functions as ksdF
 
 def pValue_KLchange(samplesize, dim, KLstatus, meanvalue, bootstrapsize = 1000, iter = 200, MH_method = True, set_bandwidth = False):
     
-    if KLstatus == "one const KL":
+    if KLstatus == "null": # under null hypothesis
+        mean = np.zeros(dim)
+    elif KLstatus == "one const KL":
         mean = np.zeros(dim)
         mean[0] = meanvalue
     elif KLstatus == "all linear incre KL":
@@ -23,8 +25,9 @@ def pValue_KLchange(samplesize, dim, KLstatus, meanvalue, bootstrapsize = 1000, 
     elif KLstatus == "one sqrt incre KL":
         mean = np.zeros(dim)
         mean[0] = meanvalue * (dim ** (1 / 4))
-    elif KLstatus == "all sqrt incre KL":
-        mean = np.ones(dim) * meanvalue / (dim ** (1 / 4))
+    elif KLstatus == "one third incre KL":
+        mean = np.zeros(dim)
+        mean[0] = meanvalue * (dim ** (1 / 6))
     elif KLstatus == "one fourth incre KL":
         mean = np.zeros(dim)
         mean[0] = meanvalue * (dim ** (1 / 8))

@@ -9,33 +9,20 @@ BootstrapSize = 1000
 iteration = 300
 meanvalue = 0.1
 
-dim_list = np.array([i*2 for i in range(11)])
+dim_list = np.array([i*5 for i in range(11)])
 dim_list[0] = 1
 dim_list_len = len(dim_list)
 
-# linear decrease KL, mean of Xi = meanvalue / dim
+p_values = np.zeros((11, iteration))
+
+# under null
 tp_KL = np.zeros(dim_list_len)
 for i in tqdm(range(dim_list_len)):
     dim = dim_list[i]
-    dim_p = h1g.pValue_KLchange(samplesize, dim, "all linear decre KL", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
+    dim_p = h1g.pValue_KLchange(samplesize, dim, "null", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
+    p_values[i] = dim_p
     tp_KL[i] = ksdF.test_power(dim_p, alpha)
 
-np.savetxt("TP_ALL_ldKL_iter300.csv", tp_KL, delimiter=",")
+np.savetxt("null_p_dim50_iter300.csv", p_values)
+np.savetxt("null_TP_dim50_iter300.csv", tp_KL, delimiter=",")
 
-# linear increase KL, mean of Xi = meanvalue
-tp_KL = np.zeros(dim_list_len)
-for i in tqdm(range(dim_list_len)):
-    dim = dim_list[i]
-    dim_p = h1g.pValue_KLchange(samplesize, dim, "all linear incre KL", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
-    tp_KL[i] = ksdF.test_power(dim_p, alpha)
-
-np.savetxt("TP_ALL_liKL_iter300.csv", tp_KL, delimiter=",")
-
-# the converging increase KL, mean of Xi = meanvalue / i
-tp_KL = np.zeros(dim_list_len)
-for i in tqdm(range(dim_list_len)):
-    dim = dim_list[i]
-    dim_p = h1g.pValue_KLchange(samplesize, dim, "all nconst incre KL", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
-    tp_KL[i] = ksdF.test_power(dim_p, alpha)
-
-np.savetxt("TP_ALL_ncKL_iter300.csv", tp_KL, delimiter=",")
