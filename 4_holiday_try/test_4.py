@@ -13,22 +13,22 @@ dim_list = np.array([i*5 for i in range(11)])
 dim_list[0] = 1
 dim_list_len = len(dim_list)
 
-# the converging increase KL, mean of Xi = meanvalue / i
+# fourth root decrease KL, mean of X1 = meanvalue * dim ** (-1/8)
 tp_KL = np.zeros(dim_list_len)
 for i in tqdm(range(dim_list_len)):
     dim = dim_list[i]
-    dim_p = h1g.pValue_KLchange(samplesize, dim, "all nconst incre KL", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
+    dim_p = h1g.pValue_KLchange(samplesize, dim, "one fourth decre KL", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
     tp_KL[i] = ksdF.test_power(dim_p, alpha)
 
-np.savetxt("TP_ALL_ncKL_higherdim.csv", tp_KL, delimiter=",")
+np.savetxt("TP_onefourth_dKL_iter300.csv", tp_KL, delimiter=",")
 
-# one eighth increase KL, mean of Xi = meanvalue / dim ** (1/4)
+# eighth root decrease KL, mean of Xi = meanvalue / dim ** (-1/16)
 tp_KL = np.zeros(dim_list_len)
 for i in tqdm(range(dim_list_len)):
     dim = dim_list[i]
-    dim_p = h1g.pValue_KLchange(samplesize, dim, "one eighth incre KL", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
+    dim_p = h1g.pValue_KLchange(samplesize, dim, "one eighth decre KL", meanvalue, bootstrapsize = BootstrapSize, iter = iteration)
     tp_KL[i] = ksdF.test_power(dim_p, alpha)
 
-np.savetxt("TP_oneeighth_iKL_higherdim.csv", tp_KL, delimiter=",")
+np.savetxt("TP_oneeighth_dKL_iter300.csv", tp_KL, delimiter=",")
 
 

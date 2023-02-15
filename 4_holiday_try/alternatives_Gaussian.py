@@ -37,6 +37,18 @@ def pValue_KLchange(samplesize, dim, KLstatus, meanvalue, bootstrapsize = 1000, 
     elif KLstatus == "one sixteenth incre KL":
         mean = np.zeros(dim)
         mean[0] = meanvalue * (dim ** (1 / 32))
+    elif KLstatus == "one sqrt decre KL":
+        mean = np.zeros(dim)
+        mean[0] = meanvalue * (dim ** (- 1 / 4))
+    elif KLstatus == "one third decre KL":
+        mean = np.zeros(dim)
+        mean[0] = meanvalue * (dim ** (- 1 / 6))
+    elif KLstatus == "one fourth decre KL":
+        mean = np.zeros(dim)
+        mean[0] = meanvalue * (dim ** (- 1 / 8))
+    elif KLstatus == "one eighth decre KL":
+        mean = np.zeros(dim)
+        mean[0] = meanvalue * (dim ** (- 1 / 16))
     else:
         mean = np.zeros(dim)
 
