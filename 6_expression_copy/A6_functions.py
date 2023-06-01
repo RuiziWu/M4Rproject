@@ -66,12 +66,12 @@ def UqMatrix(X, mean, set_bandwidth = True):
 
 def True_KSD(mean, dim, bandwidth = True):
     if bandwidth == True:
-        r = np.sqrt(dim)
+        h = np.sqrt(dim)
     else:
-        r = bandwidth
+        h = bandwidth
     d = dim
     u2 = np.dot(mean, mean)
-    KSD = (r**d * u2) / (r**2 + 2)**(d/2)
+    KSD = (h**d * u2) / (h**2 + 2)**(d/2)
     return KSD
 
 def True_Variance(samplesize, mean, dim, bandwidth = True):
