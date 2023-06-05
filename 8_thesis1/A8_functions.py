@@ -182,7 +182,6 @@ def pDist_H0_dimchange(samplesize, dim_list, set_bandwidth, bootstrapsize = 1000
     """
     n = len(dim_list)
     pvalue = np.zeros((n, iter))
-    svalue = np.zeros((n, iter))
     
     for i in tqdm(range(n)):
         dim = dim_list[i]
@@ -193,10 +192,9 @@ def pDist_H0_dimchange(samplesize, dim_list, set_bandwidth, bootstrapsize = 1000
             UMatrix = Matrix_Up(Multinormal_X, set_bandwidth)
             KSDvalue = Estimated_KSD(UMatrix)
             KSDstar = Bootstrap_KSD(UMatrix, size = bootstrapsize)
-            svalue[i, j] = KSDvalue
             pvalue[i, j] = approx_pvalue(KSDvalue, KSDstar)
 
-    return pvalue, svalue
+    return pvalue
 
 
 
